@@ -1,0 +1,75 @@
+<div>
+    <button class="btn btn-outline-primary me-3" (click)="get400Error()">Test 400 Error</button>
+    <button class="btn btn-outline-primary me-3" (click)="get401Error()">Test 401 Error</button>
+    <button class="btn btn-outline-primary me-3" (click)="get404Error()">Test 404 Error</button>
+    <button class="btn btn-outline-primary me-3" (click)="get500Error()">Test 500 Error</button> 
+    <button class="btn btn-outline-primary me-3" (click)="get400ValidationError()">
+        Test 400 Validation Error
+    </button>  
+
+    @switch (validationErrors?.['status']) {
+
+        @case (400) {
+            <div class="row mt-5">
+                <ul class="text-danger">
+                    @if(validationErrors.error.errors){
+                       @for (error of validationErrors.error.errors.UserName; track error ){
+                        <li>
+                            {{error}}
+                            </li>
+                       }
+                       @for (error of validationErrors.error.errors.password; track error ){
+                        <li>
+                            {{error}}
+                            </li>
+                       }
+                    }
+                       @if(!validationErrors.error.errors){
+                        <li>
+                            {{validationErrors.error}}
+                            </li> 
+
+                       }
+                       
+                </ul>
+            </div>
+        }
+        @case (401) {
+            <div class="row mt-5">
+                <ul class="text-danger">
+                   
+                        <li>
+                        {{validationErrors.error.text}}
+                        </li>
+                    
+                </ul>
+            </div>
+        }
+        @case (404) {
+            <div class="row mt-5">
+                <ul class="text-danger">
+                   
+                        <li>
+                        {{validationErrors.error.title}}
+                        </li>
+                    
+                </ul>
+            </div>
+        }       
+        @case (200) {
+            <div class="row mt-5">
+                <ul class="text-danger">
+                   
+                        <li>
+                        {{validationErrors.error.text}}
+                        </li>
+                    
+                </ul>
+            </div>
+        }
+
+
+    }
+
+    
+</div>
