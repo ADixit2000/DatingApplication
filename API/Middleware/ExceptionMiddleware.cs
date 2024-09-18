@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using API.Errors;
 
 namespace API.Middleware;
 
@@ -37,9 +38,9 @@ public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddlewa
 
 internal class ApiException
 {
-    private int statusCode;
-    private string message;
-    private string? stackTrace;
+    public int statusCode {get; set;}
+    public string message {get; set;}
+    public string? stackTrace {get; set;}
 
     public ApiException(int statusCode, string message, string? stackTrace)
     {

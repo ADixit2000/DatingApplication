@@ -9,19 +9,19 @@ public static class IdentityServiceExtensions
 {
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config){
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(option =>{
-            var tokenKey = config["TokenKey"] ?? throw new Exception("Token Not Found");
-            option.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
-        });
+       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+       .AddJwtBearer(option =>{
+          var tokenKey = config["TokenKey"] ?? throw new Exception("Token Not Found");
+          option.TokenValidationParameters = new TokenValidationParameters
+          {
+              ValidateIssuerSigningKey = true,
+              IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
+              ValidateIssuer = false,
+              ValidateAudience = false
+          };
+       });
 
-        return services;
+       return services;
     }
 
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-test-errors',
@@ -14,19 +15,18 @@ import { Router } from '@angular/router';
 export class TestErrorsComponent {
 
   baseUrl = 'https://localhost:2001/api/';
-  constructor(private router: Router){
+  // constructor(private router: Router){
 
-  }
-
+  // }
   private http = inject(HttpClient);
-  validationErrors: any; 
+  validationErrors: string[] = []; 
 
   get400Error(){
     this.http.get(this.baseUrl + 'buggy/bad-request').subscribe({
       next: response => console.log(response),
       error: error => {
-        console.log(error),
-      this.validationErrors = error;
+        console.log(error)
+      // this.validationErrors = error;
       }
     })
   }
@@ -35,18 +35,19 @@ export class TestErrorsComponent {
     this.http.get(this.baseUrl + 'buggy/auth').subscribe({
       next: response => console.log(response),
       error: error => {
-        console.log(error),
-      this.validationErrors = error;
+        console.log(error)
+      // this.validationErrors = error;
       }
     })
   }
 
   get404Error(){
+    debugger
     this.http.get(this.baseUrl + 'buggy/not-found').subscribe({
       next: response => console.log(response),
       error: error => {
-        console.log(error),
-      this.validationErrors = error;
+        console.log(error)
+      // this.validationErrors = error;
       }
     })
   }
@@ -55,8 +56,8 @@ export class TestErrorsComponent {
     this.http.get(this.baseUrl + 'buggy/server-error').subscribe({
       next:(response) =>  console.log(response),
       error: (error) => {
-        console.log(error),
-        this.router.navigate(['server-error'],{queryParams:{error:error}})
+        console.log(error)
+        // this.router.navigate(['server-error'],{queryParams:{error:error}})
       }  
      
 
