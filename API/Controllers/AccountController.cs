@@ -18,7 +18,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
 
         if(await UserExists(registerDto.UserName)) return BadRequest("Username is taken");
 
-         return Ok();
+        return Ok();
 
         // using var hmac = new HMACSHA512();   //TO INCRYPT TEXT
 

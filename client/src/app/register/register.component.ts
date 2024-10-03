@@ -13,21 +13,21 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent {
 private accountService = inject(AccountService);
 private toaster = inject(ToastrService)
- cancleRegister = output<boolean>();
-  model: any = {}
+cancleRegister = output<boolean>();
+model: any = {}
 
-  register(){
-    
+
+  register(){    
     this.accountService.register(this.model).subscribe({
       next: response =>{
         console.log(response);
-        this.cancle();
+        this.cancel();
       },
       error: error => this.toaster.error(error.error)
     })
   }
 
-  cancle(){
+  cancel(){
     this.cancleRegister.emit(false);
   }
 

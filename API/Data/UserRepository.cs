@@ -28,11 +28,11 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         return await context.Users.FindAsync(id);
     }
 
-    public async Task<AppUser?> GetUserByUsernameAsync(string Username)
+    public async Task<AppUser?> GetUserByUsernameAsync(string username)
     {
         return await context.Users
         .Include(x => x.Photos)
-        .SingleOrDefaultAsync(x => x.UserName == Username);
+        .SingleOrDefaultAsync(x => x.UserName == username);
     }
 
     public async Task<IEnumerable<AppUser>> GetUsersAsync()

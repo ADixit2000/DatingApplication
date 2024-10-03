@@ -6,27 +6,30 @@ using API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace API.Controllers;
 
-// [Authorize]
-public class UserController(IUserRepository userRepository) : BaseApiController
+[Authorize]
+public class UserController(IUserRepository userRepository, IMapper mapper) : BaseApiController
 {
-    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers(){
 
         var users = await userRepository.GetMembersAsync();
 
-        return Ok(users);
+        var usersToReturn = mapper.Map<IEnumerable<MemberDto>>(users);
+
+        return Ok(usersToReturn);
     }
 
-    [Authorize]
     [HttpGet("{username}")]  //api/user/3
     public async Task<ActionResult<MemberDto>> GetUser(string username){
 
         var user = await userRepository.GetMemberAsync(username);
+
+
         if(user == null) return NotFound();
-        return user;
+        return mapper.Map<MemberDto>(user);
     }
 }

@@ -11,3 +11,4 @@ public class ApiException(int statusCode, string message, string? details)
     public string? Details {get; set;} = details;
 }
 
+//Primary Constructor Approach
